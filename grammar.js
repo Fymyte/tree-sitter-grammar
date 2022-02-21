@@ -67,14 +67,20 @@ module.exports = grammar({
     rule_block: ($) =>
       seq(
         "(",
-        repeat1($._rule_item),
+        optional(":"),
+        sep1(
+          $._rule_item,
+          optional(":"),
+        ),
+        optional(":"),
         ")",
         optional($.modifier)
       ),
 
     rule_option: ($) =>
-      repeat1(
+      sep1(
         $._rule_item,
+        optional(":"),
       ),
 
     rule_definition: ($) =>
