@@ -1,0 +1,304 @@
+{
+  "name": "grammar",
+  "word": "identifier",
+  "rules": {
+    "goal": {
+      "type": "REPEAT",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "rule_definition"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "comment"
+          },
+          {
+            "type": "STRING",
+            "value": "\n"
+          }
+        ]
+      }
+    },
+    "comment": {
+      "type": "PATTERN",
+      "value": ";.*\\n"
+    },
+    "string": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\""
+        },
+        {
+          "type": "PATTERN",
+          "value": "([^\"\\n]|\\\\(.|\\n))*"
+        },
+        {
+          "type": "STRING",
+          "value": "\""
+        }
+      ]
+    },
+    "regex": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "/"
+        },
+        {
+          "type": "FIELD",
+          "name": "pattern",
+          "content": {
+            "type": "SYMBOL",
+            "name": "regex_pattern"
+          }
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "/"
+          }
+        }
+      ]
+    },
+    "regex_pattern": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "["
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "STRING",
+                            "value": "\\"
+                          },
+                          {
+                            "type": "PATTERN",
+                            "value": "."
+                          }
+                        ]
+                      },
+                      {
+                        "type": "PATTERN",
+                        "value": "[^\\]\\n\\\\]"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "STRING",
+                  "value": "]"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "\\"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "."
+                }
+              ]
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^/\\\\\\[\\n]"
+            }
+          ]
+        }
+      }
+    },
+    "_rule_item": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "regex"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          "named": true,
+          "value": "rule_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "rule_block"
+        }
+      ]
+    },
+    "modifier": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "*"
+        },
+        {
+          "type": "STRING",
+          "value": "+"
+        },
+        {
+          "type": "STRING",
+          "value": "?"
+        }
+      ]
+    },
+    "rule_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_rule_item"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "modifier"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "rule_option": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_rule_item"
+      }
+    },
+    "rule_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          "named": true,
+          "value": "name"
+        },
+        {
+          "type": "STRING",
+          "value": "::="
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "rule_option"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "STRING",
+                            "value": "\n"
+                          },
+                          {
+                            "type": "STRING",
+                            "value": "or"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "rule_option"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "comment"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "\n\n"
+        }
+      ]
+    },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[a-z_]+"
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "[\\t ]"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}
+

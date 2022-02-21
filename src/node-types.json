@@ -1,0 +1,188 @@
+[
+  {
+    "type": "goal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "rule_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "modifier",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "regex",
+    "named": true,
+    "fields": {
+      "pattern": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "regex_pattern",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "rule_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "modifier",
+          "named": true
+        },
+        {
+          "type": "regex",
+          "named": true
+        },
+        {
+          "type": "rule_block",
+          "named": true
+        },
+        {
+          "type": "rule_name",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "rule_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "name",
+          "named": true
+        },
+        {
+          "type": "rule_option",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "rule_option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "regex",
+          "named": true
+        },
+        {
+          "type": "rule_block",
+          "named": true
+        },
+        {
+          "type": "rule_name",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "\n\n",
+    "named": false
+  },
+  {
+    "type": "\"",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
+    "type": "/",
+    "named": false
+  },
+  {
+    "type": "::=",
+    "named": false
+  },
+  {
+    "type": "?",
+    "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "name",
+    "named": true
+  },
+  {
+    "type": "or",
+    "named": false
+  },
+  {
+    "type": "regex_pattern",
+    "named": true
+  },
+  {
+    "type": "rule_name",
+    "named": true
+  }
+]

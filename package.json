@@ -1,0 +1,45 @@
+{
+  "name": "tree-sitter-grammar",
+  "version": "0.0.1",
+  "description": "",
+  "main": "bindings/node",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fymyte/tree-sitter-grammar.git"
+  },
+  "keywords": [
+    "grammar",
+    "parser",
+    "tree-sitter",
+    "lexer"
+  ],
+  "author": "Fymyte",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.14.1"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.0"
+  },
+  "scripts": {
+    "tests": "tree-sitter test",
+    "test-windows": "tree-sitter test"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.grammar",
+      "file-types": [
+        "grammar"
+      ],
+      "injection-regex": "^grammar$",
+      "first-line-regex": "#!.*grammar$"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Fymyte/tree-sitter-grammar/issues"
+  },
+  "homepage": "https://github.com/Fymyte/tree-sitter-grammar#readme"
+}

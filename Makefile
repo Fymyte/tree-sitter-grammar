@@ -1,0 +1,2 @@
+all:
+	tree-sitter generate
